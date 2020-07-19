@@ -1,5 +1,6 @@
 # kalaha-api
-![](https://github.com/volkodava/kalaha-api/workflows/kalaha-api/badge.svg)
+
+![Kalaha API Build & Tests](https://github.com/volkodava/kalaha-api/workflows/Kalaha%20API%20Build%20&%20Tests/badge.svg?branch=master)
 
 A simple Kalaha Game Implementation.
 
