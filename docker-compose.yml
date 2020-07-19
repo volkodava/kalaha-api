@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  redis:
+    image: redis
+    container_name: "kalaha-redis"
+    restart: always
+    ports:
+      - "6379:6379"
+
+  redis-ui:
+    image: marian/rebrow
+    container_name: "kalaha-redis-ui"
+    restart: always
+    ports:
+      - "5001:5001"
+
+  kalaha-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: "kalaha-api"
+    depends_on:
+      - redis
+    environment:
+      - PORT=8080
+      - KALAHA_PIT_SIZE=6
+      - SPRING_APPLICATION_NAME=kalaha-api
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+    ports:
+      - "8080:8080"
