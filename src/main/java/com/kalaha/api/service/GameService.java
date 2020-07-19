@@ -1,12 +1,10 @@
 package com.kalaha.api.service;
 
-import com.kalaha.api.model.Game;
+public interface GameService<K, V> {
 
-public interface GameService {
+    K newGame();
 
-    String newGame();
+    V move(K gameId, int pitId);
 
-    Game move(String gameId, int pitId);
-
-    Game findById(String gameId);
+    V findById(K gameId);
 }

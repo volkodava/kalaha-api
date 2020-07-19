@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class GameRedisService implements GameService {
+public class GameRedisService implements GameService<String, Game> {
 
     @Value("${kalaha.pit.size-per-side}")
     private int pitSize;

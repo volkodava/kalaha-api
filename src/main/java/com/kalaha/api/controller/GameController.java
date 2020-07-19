@@ -16,9 +16,9 @@ import java.net.URI;
 @RequestMapping(value = "/games")
 public class GameController {
 
-    private final GameService gameService;
+    private final GameService<String, Game> gameService;
 
-    public GameController(GameService gameService) {
+    public GameController(GameService<String, Game> gameService) {
         this.gameService = gameService;
     }
 
