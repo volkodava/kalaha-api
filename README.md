@@ -15,9 +15,9 @@ A simple Kalaha Game Implementation.
 ## Notes
 
 The API designed as a REST APIs with JSON payload. 
-For fast reads and writes game state stored in in-memory data store - Redis. 
+To achieve fast reads and writes game state stored in the in-memory data store - Redis. 
 In addition to that Redis gives a lot of flexibility in how to persist state to the disk.
-Optimistic concurrency model applied when player updates the game state. 
+Optimistic concurrency model applied when player updates the game state (see: [GameRedisRepository.java#L62](./src/main/java/com/kalaha/api/repository/GameRedisRepository.java#L62))
 Such solution helps to avoid situations in concurrent environment, when one player can override game state updated by another player.
 
 Mission critical pieces of application covered with tests.
