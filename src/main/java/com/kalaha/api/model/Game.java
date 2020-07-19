@@ -1,9 +1,11 @@
 package com.kalaha.api.model;
 
+import java.util.List;
+
 public class Game {
     private String id;
     private Board board;
-    private Player[] players;
+    private List<Player> players;
     private int playerIndex;
     private int winnerPlayerIndex;
     private State state;
@@ -28,11 +30,11 @@ public class Game {
         this.board = board;
     }
 
-    public Player[] getPlayers() {
+    public List<Player> getPlayers() {
         return players;
     }
 
-    public void setPlayers(Player[] players) {
+    public void setPlayers(List<Player> players) {
         this.players = players;
     }
 
@@ -61,11 +63,11 @@ public class Game {
     }
 
     public Player getPlayer() {
-        return players[playerIndex];
+        return players.get(playerIndex);
     }
 
     public Player getNextPlayer() {
-        return players[getNextPlayerIndex()];
+        return players.get(getNextPlayerIndex());
     }
 
     public void setNextPlayer() {

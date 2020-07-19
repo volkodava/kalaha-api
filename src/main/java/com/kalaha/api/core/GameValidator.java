@@ -7,6 +7,7 @@ import com.kalaha.api.model.Game;
 import com.kalaha.api.model.Player;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -14,8 +15,8 @@ public class GameValidator {
     private static final int MIN_PIT_SIZE = 3;
     private static final int EXPECTED_PLAYERS_NUM = 2;
 
-    public void validateGameConfiguration(int pitSizePerSide, int stoneSizePerPit, Player[] players) {
-        if (players.length != EXPECTED_PLAYERS_NUM) {
+    public void validateGameConfiguration(int pitSizePerSide, int stoneSizePerPit, List<Player> players) {
+        if (players.size() != EXPECTED_PLAYERS_NUM) {
             throw new UnprocessedOperationException(String.format("Expected %s players", EXPECTED_PLAYERS_NUM));
         }
 

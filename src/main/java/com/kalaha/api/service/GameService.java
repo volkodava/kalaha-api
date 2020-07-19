@@ -1,57 +1,12 @@
 package com.kalaha.api.service;
 
-import com.kalaha.api.core.KalahaEngine;
-import com.kalaha.api.exception.NotFoundException;
-import com.kalaha.api.model.Board;
 import com.kalaha.api.model.Game;
-import com.kalaha.api.model.Player;
-import com.kalaha.api.repository.GameRepository;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-@Service
-public class GameService {
+public interface GameService {
 
-    @Value("${kalaha.pit.size-per-side}")
-    private int pitSize;
+    String newGame();
 
-    @Value("${kalaha.stone.size-per-pit}")
-    private int stoneSize;
+    Game move(String gameId, int pitId);
 
-    private final KalahaEngine kalahaEngine;
-    private final GameRepository<String, Game> gameRepository;
-
-    public GameService(KalahaEngine kalahaEngine,
-                       GameRepository<String, Game> gameRepository) {
-        this.kalahaEngine = kalahaEngine;
-        this.gameRepository = gameRepository;
-    }
-
-    @Transactional
-    public String newGame() {
-        Player southPlayer = new Player();
-        southPlayer.setSide(Board.Side.SOUTH);
-        southPlayer.setPosition(0);
-        Player northPlayer = new Player();
-        northPlayer.setSide(Board.Side.NORTH);
-        northPlayer.setPosition(1);
-
-        Game game = kalahaEngine.newGame(pitSize, stoneSize, new Player[]{southPlayer, northPlayer});
-        Game savedGame = gameRepository.save(game);
-
-        return savedGame.getId();
-    }
-
-    @Transactional
-    public Game move(String gameId, int pitId) {
-        return gameRepository
-                .findAndUpdate(gameId, game -> kalahaEngine.move(game, pitId));
-    }
-
-    @Transactional(readOnly = true)
-    public Game findById(String gameId) {
-        return gameRepository.findById(gameId)
-                .orElseThrow(() -> new NotFoundException("Game NOT found"));
-    }
+    Game findById(String gameId);
 }

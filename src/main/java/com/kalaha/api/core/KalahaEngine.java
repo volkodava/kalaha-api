@@ -4,6 +4,7 @@ import com.kalaha.api.model.*;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -14,7 +15,7 @@ public class KalahaEngine {
         this.gameValidator = gameValidator;
     }
 
-    public Game newGame(int pitSizePerSide, int stoneSizePerPit, Player[] players) {
+    public Game newGame(int pitSizePerSide, int stoneSizePerPit, List<Player> players) {
         gameValidator.validateGameConfiguration(pitSizePerSide, stoneSizePerPit, players);
         return createGame(pitSizePerSide, stoneSizePerPit, players);
     }
@@ -24,7 +25,7 @@ public class KalahaEngine {
         return executeMove(game, pitId);
     }
 
-    private Game createGame(int pitSizePerSide, int stoneSizePerPit, Player[] players) {
+    private Game createGame(int pitSizePerSide, int stoneSizePerPit, List<Player> players) {
         // grid = (N pits + 1 house) * 2 (players)
         int gridSize = (pitSizePerSide + 1) * 2;
         int housePosition = pitSizePerSide + 1;
@@ -53,7 +54,7 @@ public class KalahaEngine {
         Game game = new Game();
         game.setBoard(board);
         game.setPlayers(players);
-        game.setPlayerIndex(players[0].getPosition());
+        game.setPlayerIndex(players.get(0).getPosition());
         game.setWinnerPlayerIndex(-1);
         game.setState(Game.State.RUNNING);
 

@@ -4,6 +4,7 @@ import com.kalaha.api.exception.UnprocessedOperationException;
 import com.kalaha.api.model.*;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -15,7 +16,7 @@ public class KalahaEngineTests {
     private final int stoneSize;
     private final Player southPlayer;
     private final Player northPlayer;
-    private final Player[] players;
+    private final List<Player> players;
     private final int playerSouthStart;
     private final int playerSouthHouse;
     private final int playerNorthStart;
@@ -31,7 +32,7 @@ public class KalahaEngineTests {
         this.northPlayer = new Player();
         this.northPlayer.setSide(Board.Side.NORTH);
         this.northPlayer.setPosition(1);
-        this.players = new Player[]{this.southPlayer, this.northPlayer};
+        this.players = List.of(this.southPlayer, this.northPlayer);
         this.playerSouthStart = 1;
         this.playerSouthHouse = 7;
         this.playerNorthStart = 8;
@@ -47,7 +48,7 @@ public class KalahaEngineTests {
         // then
         assertThat(game).isNotNull();
         assertThat(game.getBoard()).isNotNull();
-        assertThat(game.getPlayers()).hasSize(players.length);
+        assertThat(game.getPlayers()).hasSize(players.size());
         assertThat(game.getPlayerIndex()).isEqualTo(southPlayer.getPosition());
         assertThat(game.getPlayer()).isEqualTo(southPlayer);
         assertThat(game.getNextPlayerIndex()).isEqualTo(northPlayer.getPosition());
@@ -429,7 +430,7 @@ public class KalahaEngineTests {
         Game game = new Game();
         game.setBoard(board);
         game.setPlayers(players);
-        game.setPlayerIndex(players[0].getPosition());
+        game.setPlayerIndex(players.get(0).getPosition());
         game.setWinnerPlayerIndex(-1);
         game.setState(Game.State.RUNNING);
 
