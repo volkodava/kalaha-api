@@ -37,8 +37,6 @@ public class RedisConfig {
         template.setHashValueSerializer(jsonSerializationRedisSerializer);
 
         template.setEnableTransactionSupport(true);
-        template.afterPropertiesSet();
-
         return template;
     }
 }
